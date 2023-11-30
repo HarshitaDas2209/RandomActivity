@@ -1,0 +1,46 @@
+doctype html
+html(lang="en")
+
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/styles/main.css")
+    title I'm Bored
+
+  body
+    .container
+      h1 Let's find something for you to do ✌️
+
+      form#form.form(method="POST" action="/")
+        select.form-select(name="type")
+          option(value="", data-display="Select") Random type
+          option(value="education") Education
+          option(value="charity") Charity
+          option(value="recreational") Recreational
+          option(value="relaxation") Relaxation
+          option(value="busywork") Busywork
+          option(value="social") Social
+          option(value="diy") DIY
+          option(value="music") Music
+
+        select.form-select(name="participants")
+          option(value="") Any number of people
+          option(value="1") 1
+          option(value="2") 2
+          option(value="3") 3
+          option(value="4") 4
+
+        button.form-submit(type="submit") Go
+
+      section#cards.cards
+        if locals.data
+          article.card-item
+            h2.card-activity= data.activity
+            div.card-info
+              span.card-type= data.type
+              span.card-participants
+                | participants: #{data.participants}
+                span.card-number
+
+        if locals.error
+          #tag-error.tag-error= error
